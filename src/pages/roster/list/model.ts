@@ -39,11 +39,14 @@ const Model: ModelType = {
 
   effects: {
     *fetch({ payload }, { call, put }) {
+      console.log('fetch payload');
+      console.log(payload);
       const response = yield call(queryRule, payload);
       yield put({
         type: 'save',
         payload: response,
       });
+
     },
     *add({ payload, callback }, { call, put }) {
       const response = yield call(addRule, payload);
@@ -73,12 +76,9 @@ const Model: ModelType = {
 
   reducers: {
     save(state, action) {
-      // action.payload 里面直接是[]
+      // action.payload 里面直接是
       
-      let pageData = {
-        list: action.payload, 
-        pagination: {},
-      }
+      let pageData = action.payload;
 
       return {
         ...state,

@@ -121,6 +121,10 @@ class TableList extends Component<TableListProps, TableListState> {
     const { dispatch } = this.props;
     dispatch({
       type: 'listTableList/fetch',
+      payload:{
+        currentPage: 1,
+        pageSize: 10
+      }
     });
   }
 
@@ -148,6 +152,8 @@ class TableList extends Component<TableListProps, TableListState> {
       params.sorter = `${sorter.field}_${sorter.order}`;
     }
 
+    console.log('handleStandardTableChange');
+    console.log(params)
     dispatch({
       type: 'listTableList/fetch',
       payload: params,
@@ -205,11 +211,11 @@ class TableList extends Component<TableListProps, TableListState> {
 
   handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-
     const { dispatch, form } = this.props;
-
     form.validateFields((err, fieldsValue) => {
-      if (err) return;
+      console.log(err);
+      console.log(fieldsValue);
+      // if (err) return;
 
       const values = {
         ...fieldsValue,
@@ -275,18 +281,13 @@ class TableList extends Component<TableListProps, TableListState> {
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
-            <FormItem label="规则名称">
-              {getFieldDecorator('name')(<Input placeholder="请输入" />)}
+            <FormItem label="编码">
+              {getFieldDecorator('code#contains')(<Input placeholder="请输入" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="使用状态">
-              {getFieldDecorator('status')(
-                <Select placeholder="请选择" style={{ width: '100%' }}>
-                  <Option value="0">关闭</Option>
-                  <Option value="1">运行中</Option>
-                </Select>,
-              )}
+            <FormItem label="姓名">
+              {getFieldDecorator('name#contains')( <Input placeholder="请输入" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
