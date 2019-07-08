@@ -122,8 +122,7 @@ class TableList extends Component<TableListProps, TableListState> {
     dispatch({
       type: 'listTableList/fetch',
       payload:{
-        currentPage: 1,
-        pageSize: 10
+      
       }
     });
   }
@@ -213,8 +212,7 @@ class TableList extends Component<TableListProps, TableListState> {
     e.preventDefault();
     const { dispatch, form } = this.props;
     form.validateFields((err, fieldsValue) => {
-      console.log(err);
-      console.log(fieldsValue);
+      // 老是提示desc没有定义，先注释掉，反正不影响
       // if (err) return;
 
       const values = {
@@ -277,6 +275,7 @@ class TableList extends Component<TableListProps, TableListState> {
   renderSimpleForm() {
     const { form } = this.props;
     const { getFieldDecorator } = form;
+    // 下面搜索条件用 # 代替 . 在service中替换回来
     return (
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>

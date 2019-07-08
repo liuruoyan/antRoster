@@ -16,11 +16,14 @@ export async function queryRule(params: TableListParams) {
     params["page"] = 0;
   }
 
-  console.log('queryRule');
-  console.log(params);
+  // 把 # 替换回 . 
+  // console.log('queryRule');
+  // console.log(params);
 
   let s_params = JSON.stringify(params).replace(/#/g,'.');
-  console.log(s_params);
+
+  // console.log('after stringify')
+  // console.log(s_params);
 
   params = JSON.parse(s_params);
 
@@ -29,7 +32,6 @@ export async function queryRule(params: TableListParams) {
     getResponse: true
   })
 
-  // console.log(response);
   response.then(res => {
     // console.log(res);
     // console.log(res.response.headers.get('X-Total-Count'));
