@@ -10,6 +10,7 @@ export async function queryRule(params: TableListParams) {
   if(!isNumber(params["size"])){
     params["size"] = 10;
   }
+  // 前端的page从1开始，后端的page从0开始
   params["page"] = params.currentPage - 1;
   delete params.currentPage;
   if(!isNumber(params["page"])){
@@ -38,7 +39,11 @@ export async function queryRule(params: TableListParams) {
     res["list"] = res.data;
     delete res.data;
     res["pagination"] = {
+      // total在response header中
       total:parseInt(res.response.headers.get('X-Total-Count')),
+      // page和size从request参数回取, 前端的page从1开始
+      pageSize:params["size"],
+      current:params["page"] + 1
     }
     delete res.response;
   });

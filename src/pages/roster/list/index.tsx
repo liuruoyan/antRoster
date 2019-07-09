@@ -165,6 +165,10 @@ class TableList extends Component<TableListProps, TableListState> {
     this.setState({
       formValues: {},
     });
+
+    console.log('handleFormReset');
+    console.log(this.state);
+
     dispatch({
       type: 'listTableList/fetch',
       payload: {},
