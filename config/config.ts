@@ -107,13 +107,18 @@ export default {
               name: 'conntest',
               path: '/roster/conntest',
               component: './roster/conntest',
-            }
-          ]
+            },
+          ],
         },
         {
           name: 'table-list',
           path: '/list/table-list',
           component: './list/table-list',
+        },
+        {
+          name: 'advanced-form',
+          path: '/form/advanced-form',
+          component: './form/advanced-form',
         },
         {
           path: '/',
@@ -178,13 +183,13 @@ export default {
     basePath: '/',
   },
   chainWebpack: webpackPlugin,
-  
   proxy: {
     '/server/api': {
       target: 'https://localhost:8080/',
       changeOrigin: true,
-      pathRewrite: { '^/server/api': '' },
+      pathRewrite: {
+        '^/server/api': '',
+      },
     },
   },
-  
 } as IConfig;

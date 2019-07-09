@@ -48,7 +48,7 @@ export default {
   'menu.editor.mind': '脑图编辑器',
   'menu.editor.koni': '拓扑编辑器',
   'menu.roster': '花名册',
-  'menu.roster.add': '导入员工',
+  'menu.roster.add': '新增员工',
   'menu.roster.list': '员工列表',
   'menu.roster.conntest': '表格',
 };
