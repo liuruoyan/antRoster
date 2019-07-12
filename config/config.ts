@@ -191,5 +191,12 @@ export default {
         '^/server/api': '',
       },
     },
+    '/server/roster': {
+      target: 'http://localhost:8080/',
+      changeOrigin: true,
+      pathRewrite: {
+        '^/server/roster': '',
+      },
+    },
   },
 } as IConfig;

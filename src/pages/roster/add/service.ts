@@ -1,8 +1,10 @@
-import request from 'umi-request';
+import request from "../../../utils/request";
 
-export async function fakeSubmitForm(params: any) {
-  return request('/api/forms', {
+export async function SubmitForm(params: any) {
+
+  return request('/server/roster/api/employees/forms', {
     method: 'POST',
     data: params,
+    getResponse: true
   });
 }

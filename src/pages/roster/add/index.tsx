@@ -22,6 +22,7 @@ import TableForm from './components/TableForm';
 import FooterToolbar from './components/FooterToolbar';
 import styles from './style.less';
 import Radio from 'antd/es/radio';
+import TextArea from 'antd/lib/input/TextArea';
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -29,7 +30,7 @@ const { RangePicker } = DatePicker;
 const fieldLabels = {
   // 基本信息
   name: '姓名',
-  idType: '证件类型',
+  'idType.id': '证件类型',
   jobGrade: '职级',
   position: '职务',
   job: '职位',
@@ -37,12 +38,12 @@ const fieldLabels = {
   empNo: '工号',
   idNumber: '证件号',
   phone: '手机号',
-  contractType: '合同类型',
-  type: '员工类型',
+  'contractType.id': '合同类型',
+  'type.id': '员工类型',
   hireDate: '入职日期',
   seniority: '历史工龄',
   contractor: '合同公司',
-  gender: '性别',
+  'gender.id': '性别',
   birthType: '生日类型',
   birthday: '出生日期',
   workLoc: '工作地点',
@@ -51,43 +52,34 @@ const fieldLabels = {
   firstName: '名',
   lastName: '姓',
   // 合同信息
-  startDate: '当前合同起始日',
-  endDate: '当前合同终止日',
-  email: '工作邮箱',
-  workTel: '工作电话',
-  probationEndDay: '试用期到期日',
-  probationLength: '试用期（月）',
+  'contracts[0].startDate': '当前合同起始日',
+  'contracts[0].endDate': '当前合同终止日',
+  'contracts[0].email': '工作邮箱',
+  'contracts[0].workTel': '工作电话',
+  'contracts[0].probationEndDay': '试用期到期日',
+  'contracts[0].probationLength': '试用期（月）',
   // 员工信息
-  stageName: '花名',
-  idName: '证件姓名',
-  nation: '民族',
-  accountType:'户口类型',
-  accountLoc:'户口所在地',
-  nativePlace:'籍贯',
-  currentAddr:'居住住址',
-  highestEducation:'最高学历',
-  politicsStatus: '政治面貌',
-  maritalStatus: '婚姻状况',
-  bloodType : '血型',
-  spouseName: '配偶姓名',
-  childName: '孩子姓名',
-  qq: 'QQ',
-  wechat: '微信',
-  personalEmail: '个人邮箱',
-  remark: '备注',
-  
+  'personals[0].stageName': '花名',
+  'personals[0].idName': '证件姓名',
+  'personals[0].nation': '民族',
+  'personals[0].accountType.id':'户口类型',
+  'personals[0].accountLoc':'户口所在地',
+  'personals[0].nativePlace':'籍贯',
+  'personals[0].currentAddr':'居住住址',
+  'personals[0].highestEducation.id':'最高学历',
+  'personals[0].politicsStatus.id': '政治面貌',
+  'personals[0].maritalStatus.id': '婚姻状况',
+  'personals[0].bloodType' : '血型',
+  'personals[0].spouseName': '配偶姓名',
+  'personals[0].childName': '孩子姓名',
+  'personals[0].qq': 'QQ',
+  'personals[0].wechat': '微信',
+  'personals[0].personalEmail': '个人邮箱',
+  'personals[0].emergencyContactName': '紧急联系人姓名',
+  'personals[0].emergencyContactPhone': '紧急联系人电话',
+  'personals[0].remark': '备注',
   // 银行卡信息
-  url: '仓库域名',
-  owner: '仓库管理员',
-  approver: '审批人',
-  dateRange: '生效日期',
-  type1: '仓库类型',
-  name2: '任务名',
-  url2: '任务描述',
-  owner2: '执行人',
-  approver2: '责任人',
-  dateRange2: '生效日期',
-  type2: '任务类型',
+ 
 };
 
 const tableData = [
@@ -230,8 +222,8 @@ class AdvancedForm extends Component<AdvancedFormProps> {
                   </Form.Item>
                 </Col>
                 <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
-                  <Form.Item label={fieldLabels.idType}>
-                    {getFieldDecorator('idType', {
+                  <Form.Item label={fieldLabels['idType.id']}>
+                    {getFieldDecorator('idType.id', {
                       rules: [{ required: true, message: '请选择证件类型' }],
                     })(
                       <Select placeholder="请选择证件类型">
@@ -256,21 +248,21 @@ class AdvancedForm extends Component<AdvancedFormProps> {
                 <Col lg={6} md={12} sm={24}>
                   <Form.Item label={fieldLabels.jobGrade}>
                     {getFieldDecorator('jobGrade', {
-                      rules: [{ required: true, message: '请输入职级' }],
+                      rules: [{ required: false, message: '请输入职级' }],
                     })(<Input placeholder="请输入职级" />)}
                   </Form.Item>
                 </Col>
                 <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
                   <Form.Item label={fieldLabels.position}>
                     {getFieldDecorator('position', {
-                      rules: [{ required: true, message: '请输入职务' }],
+                      rules: [{ required: false, message: '请输入职务' }],
                     })(<Input placeholder="请输入职务" />)}
                   </Form.Item>
                 </Col>
                 <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
                   <Form.Item label={fieldLabels.job}>
                     {getFieldDecorator('job', {
-                      rules: [{ required: true, message: '请输入职位' }],
+                      rules: [{ required: false, message: '请输入职位' }],
                     })(<Input placeholder="请输入职位" />)}
                   </Form.Item>
                 </Col>
@@ -279,7 +271,7 @@ class AdvancedForm extends Component<AdvancedFormProps> {
                 <Col lg={6} md={12} sm={24}>
                   <Form.Item label={fieldLabels.empNo}>
                     {getFieldDecorator('empNo', {
-                      rules: [{ required: true, message: '请输入工号' }],
+                      rules: [{ required: false, message: '请输入工号' }],
                     })(<Input placeholder="请输入工号" />)}
                   </Form.Item>
                 </Col>
@@ -291,8 +283,8 @@ class AdvancedForm extends Component<AdvancedFormProps> {
                   </Form.Item>
                 </Col>
                 <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-                  <Form.Item label={fieldLabels.contractType}>
-                    {getFieldDecorator('contractType', {
+                  <Form.Item label={fieldLabels['contractType.id']}>
+                    {getFieldDecorator('contractType.id', {
                       rules: [{ required: true, message: '请选择合同类型' }],
                     })(
                       <Select placeholder="请选择合同类型">
@@ -308,8 +300,8 @@ class AdvancedForm extends Component<AdvancedFormProps> {
               </Row>
               <Row gutter={16}>
                 <Col lg={6} md={12} sm={24}>
-                  <Form.Item label={fieldLabels.type}>
-                    {getFieldDecorator('contractType', {
+                  <Form.Item label={fieldLabels['type.id']}>
+                    {getFieldDecorator('type.id', {
                       rules: [{ required: true, message: '请选择员工类型' }],
                     })(
                       <Select placeholder="请选择员工类型">
@@ -347,13 +339,13 @@ class AdvancedForm extends Component<AdvancedFormProps> {
                 <Col lg={6} md={12} sm={24}>
                   <Form.Item label={fieldLabels.contractor}>
                     {getFieldDecorator('contractor', {
-                      rules: [{ required: true, message: '请输入合同公司' }],
+                      rules: [{ required: false, message: '请输入合同公司' }],
                     })(<Input placeholder="请输入合同公司" />)}
                   </Form.Item>
                 </Col>
                 <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
-                  <Form.Item label={fieldLabels.gender}>
-                    {getFieldDecorator('gender', {
+                  <Form.Item label={fieldLabels['gender.id']}>
+                    {getFieldDecorator('gender.id', {
                       rules: [{ required: false, message: '请选择性别' }],
                     })(
                       <Select placeholder="请选择性别">
@@ -369,8 +361,8 @@ class AdvancedForm extends Component<AdvancedFormProps> {
                       rules: [{ required: false, message: '请选择生日类型' }],
                     })(
                       <Radio.Group>
-                        <Radio value={1}>公历</Radio>
-                        <Radio value={2}>农历</Radio>
+                        <Radio value={'CALENDAR'}>公历</Radio>
+                        <Radio value={'LUNAR'}>农历</Radio>
                       </Radio.Group>
                     )}
                   </Form.Item>
@@ -379,8 +371,8 @@ class AdvancedForm extends Component<AdvancedFormProps> {
               <Row gutter={16}>
                 <Col lg={6} md={12} sm={24}>
                   <Form.Item label={fieldLabels.birthday}>
-                    {getFieldDecorator('contractor', {
-                      rules: [{ required: true, message: '请输入出生日期' }],
+                    {getFieldDecorator('birthday', {
+                      rules: [{ required: false, message: '请输入出生日期' }],
                     })(
                       <DatePicker
                         placeholder={'请选择出生日期'}
@@ -408,7 +400,7 @@ class AdvancedForm extends Component<AdvancedFormProps> {
                 <Col lg={6} md={12} sm={24}>
                   <Form.Item label={fieldLabels.nationality}>
                     {getFieldDecorator('nationality', {
-                      rules: [{ required: true, message: '请输入国籍' }],
+                      rules: [{ required: false, message: '请输入国籍' }],
                     })(<Input placeholder="请输入国籍" />)}
                   </Form.Item>
                 </Col>
@@ -433,9 +425,9 @@ class AdvancedForm extends Component<AdvancedFormProps> {
             <Form layout="vertical" hideRequiredMark>
               <Row gutter={16}>
                 <Col lg={6} md={12} sm={24}>
-                  <Form.Item label={fieldLabels.startDate}>
-                    {getFieldDecorator('startDate', {
-                      rules: [{ required: true, message: '请输入当前合同起始日' }],
+                  <Form.Item label={fieldLabels['contracts[0].startDate']}>
+                    {getFieldDecorator('contracts[0].startDate', {
+                      rules: [{ required: false, message: '请输入当前合同起始日' }],
                     })(
                       <DatePicker
                         placeholder={'请输入当前合同起始日'}
@@ -445,9 +437,9 @@ class AdvancedForm extends Component<AdvancedFormProps> {
                   </Form.Item>
                 </Col>
                 <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
-                  <Form.Item label={fieldLabels.endDate}>
-                    {getFieldDecorator('endDate', {
-                      rules: [{ required: true, message: '请输入当前合同终止日' }],
+                  <Form.Item label={fieldLabels['contracts[0].endDate']}>
+                    {getFieldDecorator('contracts[0].endDate', {
+                      rules: [{ required: false, message: '请输入当前合同终止日' }],
                     })(
                       <DatePicker
                         placeholder={'请输入当前合同终止日'}
@@ -457,25 +449,25 @@ class AdvancedForm extends Component<AdvancedFormProps> {
                   </Form.Item>
                 </Col>
                 <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-                  <Form.Item label={fieldLabels.email}>
-                    {getFieldDecorator('email', {
-                      rules: [{ required: true, message: '请输入工作邮箱' }],
+                  <Form.Item label={fieldLabels['contracts[0].email']}>
+                    {getFieldDecorator('contracts[0].email', {
+                      rules: [{ required: false, message: '请输入工作邮箱' }],
                     })(<Input placeholder="请输入工作邮箱" />)}
                   </Form.Item>
                 </Col>
               </Row>
               <Row gutter={16}>
                 <Col lg={6} md={12} sm={24}>
-                  <Form.Item label={fieldLabels.workTel}>
-                    {getFieldDecorator('workTel', {
-                      rules: [{ required: true, message: '请输入工作电话' }],
+                  <Form.Item label={fieldLabels['contracts[0].workTel']}>
+                    {getFieldDecorator('contracts[0].workTel', {
+                      rules: [{ required: false, message: '请输入工作电话' }],
                     })(<Input placeholder="请输入工作电话" />)}
                   </Form.Item>
                 </Col>
                 <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
-                  <Form.Item label={fieldLabels.probationEndDay}>
-                    {getFieldDecorator('probationEndDay', {
-                      rules: [{ required: true, message: '请输入试用期到期日' }],
+                  <Form.Item label={fieldLabels['contracts[0].probationEndDay']}>
+                    {getFieldDecorator('contracts[0].probationEndDay', {
+                      rules: [{ required: false, message: '请输入试用期到期日' }],
                     })(
                       <DatePicker
                         placeholder={'请输入试用期到期日'}
@@ -485,8 +477,8 @@ class AdvancedForm extends Component<AdvancedFormProps> {
                   </Form.Item>
                 </Col>
                 <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-                  <Form.Item label={fieldLabels.probationLength}>
-                    {getFieldDecorator('probationLength', {
+                  <Form.Item label={fieldLabels['contracts[0].probationLength']}>
+                    {getFieldDecorator('contracts[0].probationLength', {
                       rules: [{ required: false, message: '请输入试用期长度' }],
                     })(<InputNumber min={0} max={100} />)}
                   </Form.Item>
@@ -494,38 +486,35 @@ class AdvancedForm extends Component<AdvancedFormProps> {
               </Row>
             </Form>
           </Card>
-          <Card title="仓库信息" className={styles.card} bordered={false}>
+          <Card title="员工信息" className={styles.card} bordered={false}>
             <Form layout="vertical" hideRequiredMark>
               <Row gutter={16}>
                 <Col lg={6} md={12} sm={24}>
-                  <Form.Item label={fieldLabels.name}>
-                    {getFieldDecorator('name', {
-                      rules: [{ required: true, message: '请输入仓库名称' }],
-                    })(<Input placeholder="请输入仓库名称" />)}
+                  <Form.Item label={fieldLabels['personals[0].stageName']}>
+                    {getFieldDecorator('personals[0].stageName', {
+                      rules: [{ required: false, message: '请输入花名' }],
+                    })(<Input placeholder="请输入花名" />)}
                   </Form.Item>
                 </Col>
                 <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
-                  <Form.Item label={fieldLabels.url}>
-                    {getFieldDecorator('url', {
-                      rules: [{ required: true, message: '请选择' }],
-                    })(
-                      <Input
-                        style={{ width: '100%' }}
-                        addonBefore="http://"
-                        addonAfter=".com"
-                        placeholder="请输入"
-                      />,
-                    )}
+                  <Form.Item label={fieldLabels['personals[0].idName']}>
+                    {getFieldDecorator('personals[0].idName', {
+                      rules: [{ required: false, message: '请输入证件姓名' }],
+                    })(<Input placeholder="请输入证件姓名" />)}
                   </Form.Item>
                 </Col>
                 <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-                  <Form.Item label={fieldLabels.owner}>
-                    {getFieldDecorator('owner', {
-                      rules: [{ required: true, message: '请选择管理员' }],
+                  <Form.Item label={fieldLabels['personals[0].nation']}>
+                    {getFieldDecorator('personals[0].nation', {
+                      rules: [{ required: false, message: '请选择民族' }],
                     })(
-                      <Select placeholder="请选择管理员">
-                        <Option value="xiao">付晓晓</Option>
-                        <Option value="mao">周毛毛</Option>
+                      <Select placeholder="请选择民族">
+                        <Option value="汉族">汉族</Option>
+                        <Option value="蒙古族">蒙古族</Option>
+                        <Option value="回族">回族</Option>
+                        <Option value="藏族">藏族</Option>
+                        <Option value="维吾尔族">维吾尔族</Option>
+                        <Option value="其他民族">其他民族</Option>
                       </Select>,
                     )}
                   </Form.Item>
@@ -533,120 +522,172 @@ class AdvancedForm extends Component<AdvancedFormProps> {
               </Row>
               <Row gutter={16}>
                 <Col lg={6} md={12} sm={24}>
-                  <Form.Item label={fieldLabels.approver}>
-                    {getFieldDecorator('approver', {
-                      rules: [{ required: true, message: '请选择审批员' }],
+                  <Form.Item label={fieldLabels['personals[0].accountType.id']}>
+                    {getFieldDecorator('personals[0].accountType.id', {
+                      rules: [{ required: false, message: '请选择户口类型' }],
                     })(
-                      <Select placeholder="请选择审批员">
-                        <Option value="xiao">付晓晓</Option>
-                        <Option value="mao">周毛毛</Option>
+                      <Select placeholder="请选择户口类型">
+                        <Option value="1">城镇</Option>
+                        <Option value="2">非城镇</Option>
                       </Select>,
                     )}
                   </Form.Item>
                 </Col>
                 <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
-                  <Form.Item label={fieldLabels.dateRange}>
-                    {getFieldDecorator('dateRange', {
-                      rules: [{ required: true, message: '请选择生效日期' }],
+                  <Form.Item label={fieldLabels['personals[0].accountLoc']}>
+                    {getFieldDecorator('personals[0].accountLoc', {
+                      rules: [{ required: false, message: '请输入户口所在地' }],
+                    })(<Input placeholder="请输入户口所在地" />)}
+                  </Form.Item>
+                </Col>
+                <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
+                  <Form.Item label={fieldLabels['personals[0].nativePlace']}>
+                    {getFieldDecorator('personals[0].nativePlace', {
+                      rules: [{ required: false, message: '请输入籍贯' }],
+                    })(<Input placeholder="请输入籍贯" />)}
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row gutter={16}>
+                <Col lg={6} md={12} sm={24}>
+                  <Form.Item label={fieldLabels['personals[0].currentAddr']}>
+                    {getFieldDecorator('personals[0].currentAddr', {
+                      rules: [{ required: false, message: '请输入居住地址' }],
+                    })(<Input placeholder="请输入居住地址" />)}
+                  </Form.Item>
+                </Col>
+                <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
+                  <Form.Item label={fieldLabels['personals[0].highestEducation.id']}>
+                    {getFieldDecorator('personals[0].highestEducation.id', {
+                      rules: [{ required: false, message: '请选择最高学历' }],
                     })(
-                      <RangePicker
-                        placeholder={['开始日期', '结束日期']}
-                        style={{ width: '100%' }}
-                      />,
+                      <Select placeholder="请选择最高学历">
+                        <Option value="1">博士</Option>
+                        <Option value="2">硕士/MBA/EMBA</Option>
+                        <Option value="3">本科</Option>
+                        <Option value="4">大专/高职</Option>
+                        <Option value="5">高中/中专/中技</Option>
+                        <Option value="6">初中</Option>
+                        <Option value="7">小学</Option>
+                        <Option value="8">其它</Option>
+                      </Select>,
                     )}
                   </Form.Item>
                 </Col>
                 <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-                  <Form.Item label={fieldLabels.type}>
-                    {getFieldDecorator('type', {
-                      rules: [{ required: true, message: '请选择仓库类型' }],
+                <Form.Item label={fieldLabels['personals[0].politicsStatus.id']}>
+                    {getFieldDecorator('personals[0].politicsStatus.id', {
+                      rules: [{ required: false, message: '请选择政治面貌' }],
                     })(
-                      <Select placeholder="请选择仓库类型">
-                        <Option value="private">私密</Option>
-                        <Option value="public">公开</Option>
+                      <Select placeholder="请选择政治面貌">
+                        <Option value="1">党员</Option>
+                        <Option value="2">预备党员</Option>
+                        <Option value="3">民主党派</Option>
+                        <Option value="4">团员</Option>
+                        <Option value="5">群众</Option>
+                        <Option value="6">其它</Option>
                       </Select>,
                     )}
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row gutter={16}>
+                <Col lg={6} md={12} sm={24}>
+                  <Form.Item label={fieldLabels['personals[0].maritalStatus.id']}>
+                    {getFieldDecorator('personals[0].maritalStatus.id', {
+                      rules: [{ required: false, message: '请选择婚姻状况' }],
+                    })(
+                      <Select placeholder="请选择婚姻状况">
+                        <Option value="1">未婚</Option>
+                        <Option value="2">已婚</Option>
+                        <Option value="3">已婚已孕</Option>
+                      </Select>,
+                    )}
+                  </Form.Item>
+                </Col>
+                <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
+                  <Form.Item label={fieldLabels['personals[0].spouseName']}>
+                    {getFieldDecorator('personals[0].spouseName', {
+                      rules: [{ required: false, message: '请输入配偶姓名' }],
+                    })(<Input placeholder="请输入配偶姓名" />)}
+                  </Form.Item>
+                </Col>
+                <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
+                  <Form.Item label={fieldLabels['personals[0].childName']}>
+                    {getFieldDecorator('personals[0].childName', {
+                      rules: [{ required: false, message: '请输入孩子姓名' }],
+                    })(<Input placeholder="请输入孩子姓名" />)}
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row gutter={16}>
+                <Col lg={6} md={12} sm={24}>
+                  <Form.Item label={fieldLabels['personals[0].bloodType']}>
+                    {getFieldDecorator('personals[0].bloodType', {
+                      rules: [{ required: false, message: '请选择血型' }],
+                    })(
+                      <Select placeholder="请选择血型">
+                        <Option value="A">A</Option>
+                        <Option value="B">B</Option>
+                        <Option value="O">O</Option>
+                        <Option value="AB">AB</Option>
+                      </Select>,
+                    )}
+                  </Form.Item>
+                </Col>
+                <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
+                  <Form.Item label={fieldLabels['personals[0].qq']}>
+                    {getFieldDecorator('personals[0].qq', {
+                      rules: [{ required: false, message: '请输入qq' }],
+                    })(<Input placeholder="请输入qq" />)}
+                  </Form.Item>
+                </Col>
+                <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
+                  <Form.Item label={fieldLabels['personals[0].wechat']}>
+                    {getFieldDecorator('personals[0].wechat', {
+                      rules: [{ required: false, message: '请输入微信' }],
+                    })(<Input placeholder="请输入微信" />)}
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row gutter={16}>
+                <Col lg={6} md={12} sm={24}>
+                  <Form.Item label={fieldLabels['personals[0].personalEmail']}>
+                    {getFieldDecorator('personals[0].personalEmail', {
+                      rules: [{ required: false, message: '请输入个人邮箱' }],
+                    })(<Input placeholder="请输入个人邮箱" />)}
+                  </Form.Item>
+                </Col>
+                <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
+                  <Form.Item label={fieldLabels['personals[0].emergencyContactName']}>
+                    {getFieldDecorator('personals[0].emergencyContactName', {
+                      rules: [{ required: false, message: '请输入紧急联系人姓名' }],
+                    })(<Input placeholder="请输入紧急联系人姓名" />)}
+                  </Form.Item>
+                </Col>
+                <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
+                  <Form.Item label={fieldLabels['personals[0].emergencyContactPhone']}>
+                    {getFieldDecorator('personals[0].emergencyContactPhone', {
+                      rules: [{ required: false, message: '请输入紧急联系人电话' }],
+                    })(<Input placeholder="请输入紧急联系人电话" />)}
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row gutter={16}>
+                <Col lg={6} md={12} sm={24}>
+                  <Form.Item label={fieldLabels['personals[0].remark']}>
+                    {getFieldDecorator('personals[0].remark', {
+                      rules: [{ required: false, message: '请输入备注' }],
+                    })(<TextArea
+                      placeholder="请输入备注"
+                      autosize={{ minRows: 2, maxRows: 6 }}
+                    />)}
                   </Form.Item>
                 </Col>
               </Row>
             </Form>
           </Card>
-          <Card title="任务管理" className={styles.card} bordered={false}>
-            <Form layout="vertical" hideRequiredMark>
-              <Row gutter={16}>
-                <Col lg={6} md={12} sm={24}>
-                  <Form.Item label={fieldLabels.name2}>
-                    {getFieldDecorator('name2', {
-                      rules: [{ required: true, message: '请输入' }],
-                    })(<Input placeholder="请输入" />)}
-                  </Form.Item>
-                </Col>
-                <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
-                  <Form.Item label={fieldLabels.url2}>
-                    {getFieldDecorator('url2', {
-                      rules: [{ required: true, message: '请选择' }],
-                    })(<Input placeholder="请输入" />)}
-                  </Form.Item>
-                </Col>
-                <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-                  <Form.Item label={fieldLabels.owner2}>
-                    {getFieldDecorator('owner2', {
-                      rules: [{ required: true, message: '请选择管理员' }],
-                    })(
-                      <Select placeholder="请选择管理员">
-                        <Option value="xiao">付晓晓</Option>
-                        <Option value="mao">周毛毛</Option>
-                      </Select>,
-                    )}
-                  </Form.Item>
-                </Col>
-              </Row>
-              <Row gutter={16}>
-                <Col lg={6} md={12} sm={24}>
-                  <Form.Item label={fieldLabels.approver2}>
-                    {getFieldDecorator('approver2', {
-                      rules: [{ required: true, message: '请选择审批员' }],
-                    })(
-                      <Select placeholder="请选择审批员">
-                        <Option value="xiao">付晓晓</Option>
-                        <Option value="mao">周毛毛</Option>
-                      </Select>,
-                    )}
-                  </Form.Item>
-                </Col>
-                <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
-                  <Form.Item label={fieldLabels.dateRange2}>
-                    {getFieldDecorator('dateRange2', {
-                      rules: [{ required: true, message: '请输入' }],
-                    })(
-                      <TimePicker
-                        placeholder="提醒时间"
-                        style={{ width: '100%' }}
-                        getPopupContainer={trigger => {
-                          if (trigger && trigger.parentNode) {
-                            return trigger.parentNode as HTMLElement;
-                          }
-                          return trigger;
-                        }}
-                      />,
-                    )}
-                  </Form.Item>
-                </Col>
-                <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-                  <Form.Item label={fieldLabels.type2}>
-                    {getFieldDecorator('type2', {
-                      rules: [{ required: true, message: '请选择仓库类型' }],
-                    })(
-                      <Select placeholder="请选择仓库类型">
-                        <Option value="private">私密</Option>
-                        <Option value="public">公开</Option>
-                      </Select>,
-                    )}
-                  </Form.Item>
-                </Col>
-              </Row>
-            </Form>
-          </Card>
+
           <Card title="成员管理" bordered={false}>
             {getFieldDecorator('members', {
               initialValue: tableData,

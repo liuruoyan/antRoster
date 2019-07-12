@@ -28,7 +28,7 @@ export async function queryRule(params: TableListParams) {
 
   params = JSON.parse(s_params);
 
-  let response = request('http://localhost:8080/api/employees', {
+  let response = request('/server/roster/api/employees', {
     params,
     getResponse: true
   })

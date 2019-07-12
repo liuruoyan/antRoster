@@ -1,7 +1,7 @@
 import { AnyAction } from 'redux';
 import { EffectsCommandMap } from 'dva';
-import { message } from 'antd';
-import { fakeSubmitForm } from './service';
+import { SubmitForm } from './service';
+import router from 'umi/router';
 
 export type Effect = (
   action: AnyAction,
@@ -23,8 +23,9 @@ const Model: ModelType = {
 
   effects: {
     *submitAdvancedForm({ payload }, { call }) {
-      yield call(fakeSubmitForm, payload);
-      message.success('提交成功');
+      const response = yield call(SubmitForm, payload);
+      console.log(response);
+      router.push('/roster/list');
     },
   },
 };

@@ -30,6 +30,7 @@ import UpdateForm, { FormValsType } from './components/UpdateForm';
 import { TableListItem, TableListPagination, TableListParams } from './data.d';
 
 import styles from './style.less';
+import router from 'umi/router';
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -236,9 +237,10 @@ class TableList extends Component<TableListProps, TableListState> {
   };
 
   handleModalVisible = (flag?: boolean) => {
-    this.setState({
-      modalVisible: !!flag,
-    });
+    router.push('/roster/add');
+    // this.setState({
+    //   modalVisible: !!flag,
+    // });
   };
 
   handleUpdateModalVisible = (flag?: boolean, record?: FormValsType) => {
