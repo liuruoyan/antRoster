@@ -28,7 +28,7 @@ export interface ModelType {
 }
 
 const Model: ModelType = {
-  namespace: 'listTableList',
+  namespace: 'rosterTableList',
 
   state: {
     data: {
@@ -93,10 +93,7 @@ const Model: ModelType = {
       console.log('return')
       console.log(res);
 
-      return {
-        ...state,
-        data: pageData,
-      };
+      return res;
     },
   },
 };

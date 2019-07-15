@@ -46,7 +46,7 @@ const status = ['关闭', '运行中', '已上线', '异常'];
 interface TableListProps extends FormComponentProps {
   dispatch: Dispatch<any>;
   loading: boolean;
-  listTableList: StateType;
+  rosterTableList: StateType;
 }
 
 interface TableListState {
@@ -61,17 +61,17 @@ interface TableListState {
 /* eslint react/no-multi-comp:0 */
 @connect(
   ({
-    listTableList,
+    rosterTableList,
     loading,
   }: {
-    listTableList: StateType;
+    rosterTableList: StateType;
     loading: {
       models: {
         [key: string]: boolean;
       };
     };
   }) => ({
-    listTableList,
+    rosterTableList,
     loading: loading.models.rule,
   }),
 )
@@ -121,7 +121,7 @@ class TableList extends Component<TableListProps, TableListState> {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 'listTableList/fetch',
+      type: 'rosterTableList/fetch',
       payload:{
       
       }
@@ -155,7 +155,7 @@ class TableList extends Component<TableListProps, TableListState> {
     console.log('handleStandardTableChange');
     console.log(params)
     dispatch({
-      type: 'listTableList/fetch',
+      type: 'rosterTableList/fetch',
       payload: params,
     });
   };
@@ -171,7 +171,7 @@ class TableList extends Component<TableListProps, TableListState> {
     console.log(this.state);
 
     dispatch({
-      type: 'listTableList/fetch',
+      type: 'rosterTableList/fetch',
       payload: {},
     });
   };
@@ -191,7 +191,7 @@ class TableList extends Component<TableListProps, TableListState> {
     switch (e.key) {
       case 'remove':
         dispatch({
-          type: 'listTableList/remove',
+          type: 'rosterTableList/remove',
           payload: {
             key: selectedRows.map(row => row.key),
           },
@@ -230,7 +230,7 @@ class TableList extends Component<TableListProps, TableListState> {
       });
 
       dispatch({
-        type: 'listTableList/fetch',
+        type: 'rosterTableList/fetch',
         payload: values,
       });
     });
@@ -253,7 +253,7 @@ class TableList extends Component<TableListProps, TableListState> {
   handleAdd = (fields: { desc: any }) => {
     const { dispatch } = this.props;
     dispatch({
-      type: 'listTableList/add',
+      type: 'rosterTableList/add',
       payload: {
         desc: fields.desc,
       },
@@ -266,7 +266,7 @@ class TableList extends Component<TableListProps, TableListState> {
   handleUpdate = (fields: FormValsType) => {
     const { dispatch } = this.props;
     dispatch({
-      type: 'listTableList/update',
+      type: 'rosterTableList/update',
       payload: {
         name: fields.name,
         desc: fields.desc,
@@ -394,10 +394,13 @@ class TableList extends Component<TableListProps, TableListState> {
 
   render() {
     const {
-      listTableList: { data },
+      rosterTableList: { data },
       loading,
       form,
     } = this.props;
+
+    console.log('render data');
+    console.log(data);
 
     const { selectedRows, modalVisible, updateModalVisible, stepFormValues } = this.state;
     const menu = (

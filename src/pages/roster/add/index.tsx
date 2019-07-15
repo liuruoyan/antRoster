@@ -23,6 +23,7 @@ import FooterToolbar from './components/FooterToolbar';
 import styles from './style.less';
 import Radio from 'antd/es/radio';
 import TextArea from 'antd/lib/input/TextArea';
+import { StateType } from './model';
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -106,18 +107,40 @@ const tableData = [
 interface AdvancedFormProps extends FormComponentProps {
   dispatch: Dispatch<any>;
   submitting: boolean;
+  rosterAdvancedForm: StateType;
 }
 
-@connect(({ loading }: { loading: { effects: { [key: string]: boolean } } }) => ({
-  submitting: loading.effects['formAdvancedForm/submitAdvancedForm'],
+@connect(({ rosterAdvancedForm ,loading }: { rosterAdvancedForm:StateType, loading: { effects: { [key: string]: boolean } } }) => ({
+  rosterAdvancedForm, submitting: loading.effects['rosterAdvancedForm/submitAdvancedForm'],
 }))
 class AdvancedForm extends Component<AdvancedFormProps> {
   state = {
     width: '100%',
+    data:{
+      idTypes:[],
+      contractTypes:[],
+      types:[],
+      genders:[],
+      accountTypes:[],
+      highestEducations:[],
+      politicsStatuses:[],
+      maritalStatuses:[],
+    }
   };
 
   componentDidMount() {
     window.addEventListener('resize', this.resizeFooterToolbar, { passive: true });
+
+    // 发送字典项请求
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'rosterAdvancedForm/fetchDictionaryEntry',
+      payload:{
+        name:'enum-id-types',
+        key:'idTypes',
+      },
+    });
+
   }
 
   componentWillUnmount() {
@@ -195,7 +218,7 @@ class AdvancedForm extends Component<AdvancedFormProps> {
       if (!error) {
         // submit the values
         dispatch({
-          type: 'formAdvancedForm/submitAdvancedForm',
+          type: 'rosterAdvancedForm/submitAdvancedForm',
           payload: values,
         });
       }
@@ -204,9 +227,11 @@ class AdvancedForm extends Component<AdvancedFormProps> {
 
   render() {
     const {
+      rosterAdvancedForm:{data},
       form: { getFieldDecorator },
       submitting,
     } = this.props;
+
     const { width } = this.state;
     return (
       <>
@@ -227,12 +252,12 @@ class AdvancedForm extends Component<AdvancedFormProps> {
                       rules: [{ required: true, message: '请选择证件类型' }],
                     })(
                       <Select placeholder="请选择证件类型">
-                        <Option value="1">居民身份证</Option>
-                        <Option value="2">中国护照</Option>
-                        <Option value="3">外国护照</Option>
-                        <Option value="4">港澳台通行证</Option>
-                        <Option value="5">其它</Option>
-                      </Select>,
+                        {
+                          data.idTypes.map((v) => {
+                            return <Option value={v.id}>{v.valuez}</Option>
+                          })
+                        }
+                      </Select>
                     )}
                   </Form.Item>
                 </Col>
@@ -695,7 +720,10 @@ class AdvancedForm extends Component<AdvancedFormProps> {
           </Card>
         </PageHeaderWrapper>
         <FooterToolbar style={{ width }}>
-          {this.getErrorInfo()}
+          {
+            // 总的错误提示，打开会提示 If you meant to render a collection of children, use an array
+            // this.getErrorInfo()
+          }
           <Button type="primary" onClick={this.validate} loading={submitting}>
             提交
           </Button>

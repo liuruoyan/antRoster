@@ -8,3 +8,11 @@ export async function SubmitForm(params: any) {
     getResponse: true
   });
 }
+
+export async function QueryEnumIdTypes(params: any) {
+  return request('/server/roster/api/' + params.name, {
+    method: 'GET',
+    data: params,
+    getResponse: true
+  });
+}
