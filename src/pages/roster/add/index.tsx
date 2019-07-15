@@ -235,7 +235,7 @@ class AdvancedForm extends Component<AdvancedFormProps> {
     const { width } = this.state;
     return (
       <>
-        <PageHeaderWrapper content="高级表单常见于一次性输入和提交大批量数据的场景。">
+        <PageHeaderWrapper content="">
           <Card title="基础信息" className={styles.card} bordered={false}>
             <Form layout="vertical" hideRequiredMark>
               <Row gutter={16}>
