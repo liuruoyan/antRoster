@@ -140,6 +140,55 @@ class AdvancedForm extends Component<AdvancedFormProps> {
         key:'idTypes',
       },
     });
+    dispatch({
+      type: 'rosterAdvancedForm/fetchDictionaryEntry',
+      payload:{
+        name:'enum-contract-types',
+        key:'contractTypes',
+      },
+    });
+    dispatch({
+      type: 'rosterAdvancedForm/fetchDictionaryEntry',
+      payload:{
+        name:'enum-emp-types',
+        key:'types',
+      },
+    });
+    dispatch({
+      type: 'rosterAdvancedForm/fetchDictionaryEntry',
+      payload:{
+        name:'enum-genders',
+        key:'genders',
+      },
+    });
+    dispatch({
+      type: 'rosterAdvancedForm/fetchDictionaryEntry',
+      payload:{
+        name:'enum-account-types',
+        key:'accountTypes',
+      },
+    });
+    dispatch({
+      type: 'rosterAdvancedForm/fetchDictionaryEntry',
+      payload:{
+        name:'enum-highest-educations',
+        key:'highestEducations',
+      },
+    });
+    dispatch({
+      type: 'rosterAdvancedForm/fetchDictionaryEntry',
+      payload:{
+        name:'enum-politics-statuses',
+        key:'politicsStatuses',
+      },
+    });
+    dispatch({
+      type: 'rosterAdvancedForm/fetchDictionaryEntry',
+      payload:{
+        name:'enum-marital-statuses',
+        key:'maritalStatuses',
+      },
+    });
 
   }
 
@@ -313,11 +362,11 @@ class AdvancedForm extends Component<AdvancedFormProps> {
                       rules: [{ required: true, message: '请选择合同类型' }],
                     })(
                       <Select placeholder="请选择合同类型">
-                        <Option value="1">劳动合同</Option>
-                        <Option value="2">劳务合同</Option>
-                        <Option value="3">实习合同</Option>
-                        <Option value="4">无固定期限劳动合同</Option>
-                        <Option value="5">其它合同</Option>
+                        {
+                          data.contractTypes.map((v) => {
+                            return <Option value={v.id}>{v.valuez}</Option>
+                          })
+                        }
                       </Select>,
                     )}
                   </Form.Item>
@@ -330,12 +379,11 @@ class AdvancedForm extends Component<AdvancedFormProps> {
                       rules: [{ required: true, message: '请选择员工类型' }],
                     })(
                       <Select placeholder="请选择员工类型">
-                        <Option value="1">全职</Option>
-                        <Option value="2">兼职</Option>
-                        <Option value="3">实习</Option>
-                        <Option value="4">外派</Option>
-                        <Option value="5">临时工</Option>
-                        <Option value="6">退休返聘</Option>
+                        {
+                          data.types.map((v) => {
+                            return <Option value={v.id}>{v.valuez}</Option>
+                          })
+                        }
                       </Select>,
                     )}
                   </Form.Item>
@@ -374,8 +422,11 @@ class AdvancedForm extends Component<AdvancedFormProps> {
                       rules: [{ required: false, message: '请选择性别' }],
                     })(
                       <Select placeholder="请选择性别">
-                        <Option value="1">男</Option>
-                        <Option value="2">女</Option>
+                        {
+                          data.genders.map((v) => {
+                            return <Option value={v.id}>{v.valuez}</Option>
+                          })
+                        }
                       </Select>,
                     )}
                   </Form.Item>
@@ -552,8 +603,11 @@ class AdvancedForm extends Component<AdvancedFormProps> {
                       rules: [{ required: false, message: '请选择户口类型' }],
                     })(
                       <Select placeholder="请选择户口类型">
-                        <Option value="1">城镇</Option>
-                        <Option value="2">非城镇</Option>
+                        {
+                          data.accountTypes.map((v) => {
+                            return <Option value={v.id}>{v.valuez}</Option>
+                          })
+                        }
                       </Select>,
                     )}
                   </Form.Item>
@@ -587,14 +641,11 @@ class AdvancedForm extends Component<AdvancedFormProps> {
                       rules: [{ required: false, message: '请选择最高学历' }],
                     })(
                       <Select placeholder="请选择最高学历">
-                        <Option value="1">博士</Option>
-                        <Option value="2">硕士/MBA/EMBA</Option>
-                        <Option value="3">本科</Option>
-                        <Option value="4">大专/高职</Option>
-                        <Option value="5">高中/中专/中技</Option>
-                        <Option value="6">初中</Option>
-                        <Option value="7">小学</Option>
-                        <Option value="8">其它</Option>
+                        {
+                          data.highestEducations.map((v) => {
+                            return <Option value={v.id}>{v.valuez}</Option>
+                          })
+                        }
                       </Select>,
                     )}
                   </Form.Item>
@@ -605,12 +656,11 @@ class AdvancedForm extends Component<AdvancedFormProps> {
                       rules: [{ required: false, message: '请选择政治面貌' }],
                     })(
                       <Select placeholder="请选择政治面貌">
-                        <Option value="1">党员</Option>
-                        <Option value="2">预备党员</Option>
-                        <Option value="3">民主党派</Option>
-                        <Option value="4">团员</Option>
-                        <Option value="5">群众</Option>
-                        <Option value="6">其它</Option>
+                        {
+                          data.politicsStatuses.map((v) => {
+                            return <Option value={v.id}>{v.valuez}</Option>
+                          })
+                        }
                       </Select>,
                     )}
                   </Form.Item>
@@ -623,9 +673,11 @@ class AdvancedForm extends Component<AdvancedFormProps> {
                       rules: [{ required: false, message: '请选择婚姻状况' }],
                     })(
                       <Select placeholder="请选择婚姻状况">
-                        <Option value="1">未婚</Option>
-                        <Option value="2">已婚</Option>
-                        <Option value="3">已婚已孕</Option>
+                        {
+                          data.maritalStatuses.map((v) => {
+                            return <Option value={v.id}>{v.valuez}</Option>
+                          })
+                        }
                       </Select>,
                     )}
                   </Form.Item>
