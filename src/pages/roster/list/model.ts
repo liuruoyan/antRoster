@@ -45,6 +45,10 @@ const Model: ModelType = {
       // console.log('fetch payload');
       // console.log(payload);
       const response = yield call(queryRule, payload);
+
+      console.log('fetch response');
+      console.log(response)
+
       yield put({
         type: 'save',
         payload: response,

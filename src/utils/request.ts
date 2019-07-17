@@ -27,7 +27,9 @@ const codeMessage = {
  * 异常处理程序
  */
 const errorHandler = (error: { response: Response }): void => {
+  console.log('errorHandler response');
   const { response } = error;
+  console.log(response);
   if (response && response.status) {
     const errorText = codeMessage[response.status] || response.statusText;
     const { status, url } = response;
@@ -47,20 +49,5 @@ const request = extend({
   credentials: 'include', // 默认请求是否带上cookie
 });
 
-
-const checkStatus = response => {
-  if (response.status >= 200 && response.status < 300) {
-    return response;
-  }
-  const errortext = codeMessage[response.status] || response.statusText;
-  notification.error({
-    message: `请求错误 ${response.status}: ${response.url}`,
-    description: errortext,
-  });
-  const error = new Error(errortext);
-  error.name = response.status;
-  error.response = response;
-  throw error;
-};
 
 export default request;

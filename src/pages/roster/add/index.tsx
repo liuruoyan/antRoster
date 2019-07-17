@@ -274,6 +274,16 @@ class AdvancedForm extends Component<AdvancedFormProps> {
     });
   };
 
+  /**
+   * 渲染枚举项的Option
+   */
+  renderEnumItems(list){
+    return list.map((v) => {
+      return <Option value={v.id}>{v.valuez}</Option>
+    })
+  };
+
+
   render() {
     const {
       rosterAdvancedForm:{data},
@@ -302,9 +312,7 @@ class AdvancedForm extends Component<AdvancedFormProps> {
                     })(
                       <Select placeholder="请选择证件类型">
                         {
-                          data.idTypes.map((v) => {
-                            return <Option value={v.id}>{v.valuez}</Option>
-                          })
+                          this.renderEnumItems(data.idTypes)
                         }
                       </Select>
                     )}
@@ -363,9 +371,7 @@ class AdvancedForm extends Component<AdvancedFormProps> {
                     })(
                       <Select placeholder="请选择合同类型">
                         {
-                          data.contractTypes.map((v) => {
-                            return <Option value={v.id}>{v.valuez}</Option>
-                          })
+                          this.renderEnumItems(data.contractTypes)
                         }
                       </Select>,
                     )}
@@ -380,9 +386,7 @@ class AdvancedForm extends Component<AdvancedFormProps> {
                     })(
                       <Select placeholder="请选择员工类型">
                         {
-                          data.types.map((v) => {
-                            return <Option value={v.id}>{v.valuez}</Option>
-                          })
+                          this.renderEnumItems(data.types)
                         }
                       </Select>,
                     )}
@@ -423,9 +427,7 @@ class AdvancedForm extends Component<AdvancedFormProps> {
                     })(
                       <Select placeholder="请选择性别">
                         {
-                          data.genders.map((v) => {
-                            return <Option value={v.id}>{v.valuez}</Option>
-                          })
+                          this.renderEnumItems(data.genders)
                         }
                       </Select>,
                     )}
@@ -604,9 +606,7 @@ class AdvancedForm extends Component<AdvancedFormProps> {
                     })(
                       <Select placeholder="请选择户口类型">
                         {
-                          data.accountTypes.map((v) => {
-                            return <Option value={v.id}>{v.valuez}</Option>
-                          })
+                          this.renderEnumItems(data.accountTypes)
                         }
                       </Select>,
                     )}
@@ -642,9 +642,7 @@ class AdvancedForm extends Component<AdvancedFormProps> {
                     })(
                       <Select placeholder="请选择最高学历">
                         {
-                          data.highestEducations.map((v) => {
-                            return <Option value={v.id}>{v.valuez}</Option>
-                          })
+                          this.renderEnumItems(data.highestEducations)
                         }
                       </Select>,
                     )}
@@ -657,9 +655,7 @@ class AdvancedForm extends Component<AdvancedFormProps> {
                     })(
                       <Select placeholder="请选择政治面貌">
                         {
-                          data.politicsStatuses.map((v) => {
-                            return <Option value={v.id}>{v.valuez}</Option>
-                          })
+                          this.renderEnumItems(data.politicsStatuses)
                         }
                       </Select>,
                     )}
@@ -674,9 +670,7 @@ class AdvancedForm extends Component<AdvancedFormProps> {
                     })(
                       <Select placeholder="请选择婚姻状况">
                         {
-                          data.maritalStatuses.map((v) => {
-                            return <Option value={v.id}>{v.valuez}</Option>
-                          })
+                          this.renderEnumItems(data.maritalStatuses)
                         }
                       </Select>,
                     )}

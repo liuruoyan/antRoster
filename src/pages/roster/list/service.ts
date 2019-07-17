@@ -1,4 +1,5 @@
-import request from 'umi-request';
+// import request from 'umi-request';
+import request from '../../../utils/request';
 import { TableListParams } from './data.d';
 import {isNumber} from '../../../utils/numberUtils'
 
@@ -26,16 +27,21 @@ export async function queryRule(params: TableListParams) {
     getResponse: true
   })
   response.then(res => {
-    res["list"] = res.data;
-    delete res.data;
-    res["pagination"] = {
-      // total在response header中
-      total:parseInt(res.response.headers.get('X-Total-Count')),
-      // page和size从request参数回取, 前端的page从1开始
-      pageSize:params["size"],
-      current:params["page"] + 1
+    try{
+      res["list"] = res.data;
+      delete res.data;
+      res["pagination"] = {
+        // total在response header中
+        total:parseInt(res.response.headers.get('X-Total-Count')),
+        // page和size从request参数回取, 前端的page从1开始
+        pageSize:params["size"],
+        current:params["page"] + 1
+      }
+      delete res.response;
+    } catch(e){
+
     }
-    delete res.response;
+    
   });
 
   return response;
