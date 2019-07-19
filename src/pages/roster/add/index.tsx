@@ -321,7 +321,8 @@ class AdvancedForm extends Component<AdvancedFormProps> {
                 <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
                   <Form.Item label={fieldLabels.idNumber}>
                     {getFieldDecorator('idNumber', {
-                      rules: [{ required: true, message: '请输入证件号' }],
+                      rules: [{ required: true, message: '请输入证件号' },
+                              {pattern:'((11|12|13|14|15|21|22|23|31|32|33|34|35|36|37|41|42|43|44|45|46|50|51|52|53|54|61|62|63|64|65)[0-9]{4})(([1|2][0-9]{3}[0|1][0-9][0-3][0-9][0-9]{3}[Xx0-9])|([0-9]{2}[0|1][0-9][0-3][0-9][0-9]{3}))', message:'证件号格式不正确'}],
                     })(<Input placeholder="请输入证件号" />)}
                   </Form.Item>
                 </Col>
@@ -360,7 +361,8 @@ class AdvancedForm extends Component<AdvancedFormProps> {
                 <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
                   <Form.Item label={fieldLabels.phone}>
                     {getFieldDecorator('phone', {
-                      rules: [{ required: true, message: '请输入手机号' }],
+                      rules: [{ required: true, message: '请输入手机号' },
+                              {pattern:'^[1]([3-9])[0-9]{9}$',message:'手机号格式不正确'}],
                     })(<Input placeholder="请输入手机号" />)}
                   </Form.Item>
                 </Col>

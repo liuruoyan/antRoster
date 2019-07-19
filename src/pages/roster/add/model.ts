@@ -2,6 +2,7 @@ import { AnyAction, Reducer } from 'redux';
 import { EffectsCommandMap } from 'dva';
 import { SubmitForm, QueryEnumIdTypes } from './service';
 import router from 'umi/router';
+import { message } from 'antd';
 
 export interface StateType {
   data: EnumListDate;
@@ -55,7 +56,9 @@ const Model: ModelType = {
     *submitAdvancedForm({ payload }, { call }) {
       const response = yield call(SubmitForm, payload);
       console.log(response);
-      router.push('/roster/list');
+      if(response.response.status >= 200 && response.response.status < 300){
+        message.success("添加成功",()=>{router.push('/roster/list')});
+      }
     },
 
     *fetchDictionaryEntry({ payload }, { call, put }) {
