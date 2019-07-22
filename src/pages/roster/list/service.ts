@@ -30,9 +30,14 @@ export async function queryRule(params: TableListParams) {
     try{
       res["list"] = res.data;
       delete res.data;
+      // total在response header中
+      let s_total = res.response.headers.get('X-Total-Count');
+      let number_total = 0;
+      if(s_total){
+        number_total =  parseInt(s_total);
+      }
       res["pagination"] = {
-        // total在response header中
-        total:parseInt(res.response.headers.get('X-Total-Count')),
+        total:number_total,
         // page和size从request参数回取, 前端的page从1开始
         pageSize:params["size"],
         current:params["page"] + 1

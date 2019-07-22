@@ -39,10 +39,6 @@ const getValue = (obj: { [x: string]: string[] }) =>
     .map(key => obj[key])
     .join(',');
 
-type IStatusMapType = 'default' | 'processing' | 'success' | 'error';
-const statusMap = ['default', 'processing', 'success', 'error'];
-const status = ['关闭', '运行中', '已上线', '异常'];
-
 interface TableListProps extends FormComponentProps {
   dispatch: Dispatch<any>;
   loading: boolean;
@@ -122,9 +118,23 @@ class TableList extends Component<TableListProps, TableListState> {
     const { dispatch } = this.props;
     dispatch({
       type: 'rosterTableList/fetch',
-      payload:{
-      
+      payload: {
+
       }
+    });
+    dispatch({
+      type: 'rosterTableList/fetchDictionaryEntry',
+      payload:{
+        name:'enum-emp-types',
+        key:'types',
+      },
+    });
+    dispatch({
+      type: 'rosterTableList/fetchDictionaryEntry',
+      payload:{
+        name:'enum-emp-statuses',
+        key:'statuses',
+      },
     });
   }
 
@@ -292,7 +302,7 @@ class TableList extends Component<TableListProps, TableListState> {
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="姓名">
-              {getFieldDecorator('name#contains')( <Input placeholder="请输入" />)}
+              {getFieldDecorator('name#contains')(<Input placeholder="请输入" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
@@ -313,58 +323,62 @@ class TableList extends Component<TableListProps, TableListState> {
     );
   }
 
+  /**
+   * 渲染枚举项的Option
+   */
+  renderEnumItems(list){
+    return list.map((v) => {
+      return <Option key={v.id} value={v.id}>{v.valuez}</Option>
+    })
+  };
+
   renderAdvancedForm() {
     const {
+      rosterTableList:{data},
       form: { getFieldDecorator },
     } = this.props;
     return (
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
-            <FormItem label="规则名称">
-              {getFieldDecorator('name')(<Input placeholder="请输入" />)}
+            <FormItem label="工号">
+              {getFieldDecorator('empNo#contains')(<Input placeholder="请输入" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="使用状态">
-              {getFieldDecorator('status')(
-                <Select placeholder="请选择" style={{ width: '100%' }}>
-                  <Option value="0">关闭</Option>
-                  <Option value="1">运行中</Option>
-                </Select>,
-              )}
+            <FormItem label="姓名">
+              {getFieldDecorator('name#contains')(<Input placeholder="请输入" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="调用次数">
-              {getFieldDecorator('number')(<InputNumber style={{ width: '100%' }} />)}
+            <FormItem label="员工类型">
+              {getFieldDecorator('empTypeId#equals')(
+                <Select placeholder="请选择员工类型">
+                  {
+                    this.renderEnumItems(data.types)
+                  }
+                </Select>)}
             </FormItem>
           </Col>
         </Row>
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
-            <FormItem label="更新日期">
-              {getFieldDecorator('date')(
-                <DatePicker style={{ width: '100%' }} placeholder="请输入更新日期" />,
-              )}
+            <FormItem label="部门">
+              {getFieldDecorator('deptName#contains')(<Input placeholder="请输入" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="使用状态">
-              {getFieldDecorator('status3')(
-                <Select placeholder="请选择" style={{ width: '100%' }}>
-                  <Option value="0">关闭</Option>
-                  <Option value="1">运行中</Option>
-                </Select>,
-              )}
+            <FormItem label="职位">
+              {getFieldDecorator('job#contains')(<Input placeholder="请输入" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="使用状态">
-              {getFieldDecorator('status4')(
-                <Select placeholder="请选择" style={{ width: '100%' }}>
-                  <Option value="0">关闭</Option>
-                  <Option value="1">运行中</Option>
+            <FormItem label="员工状态">
+              {getFieldDecorator('statusId#equals')(
+                <Select placeholder="请选择员工状态" style={{ width: '100%' }}>
+                  {
+                    this.renderEnumItems(data.statuses)
+                  }
                 </Select>,
               )}
             </FormItem>

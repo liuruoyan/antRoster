@@ -18,7 +18,7 @@ import { Dispatch } from 'redux';
 import { FormComponentProps } from 'antd/es/form';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { connect } from 'dva';
-import TableForm from './components/TableForm';
+import PaycardTableForm from './components/PaycardTableForm';
 import FooterToolbar from './components/FooterToolbar';
 import styles from './style.less';
 import Radio from 'antd/es/radio';
@@ -86,22 +86,12 @@ const fieldLabels = {
 const tableData = [
   {
     key: '1',
-    workId: '00001',
-    name: 'John Brown',
-    department: 'New York No. 1 Lake Park',
+    depositBank: '招行银行',
+    branch: '漕河泾支行',
+    bankAccount: '41431256236345123',
+    accountName: '章伞',
   },
-  {
-    key: '2',
-    workId: '00002',
-    name: 'Jim Green',
-    department: 'London No. 1 Lake Park',
-  },
-  {
-    key: '3',
-    workId: '00003',
-    name: 'Joe Black',
-    department: 'Sidney No. 1 Lake Park',
-  },
+  
 ];
 
 interface AdvancedFormProps extends FormComponentProps {
@@ -279,7 +269,7 @@ class AdvancedForm extends Component<AdvancedFormProps> {
    */
   renderEnumItems(list){
     return list.map((v) => {
-      return <Option value={v.id}>{v.valuez}</Option>
+      return <Option key={v.id} value={v.id}>{v.valuez}</Option>
     })
   };
 
@@ -761,10 +751,10 @@ class AdvancedForm extends Component<AdvancedFormProps> {
             </Form>
           </Card>
 
-          <Card title="成员管理" bordered={false}>
-            {getFieldDecorator('members', {
+          <Card title="银行卡信息" bordered={false}>
+            {getFieldDecorator('payCards', {
               initialValue: tableData,
-            })(<TableForm />)}
+            })(<PaycardTableForm />)}
           </Card>
         </PageHeaderWrapper>
         <FooterToolbar style={{ width }}>

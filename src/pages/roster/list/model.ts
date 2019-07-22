@@ -3,14 +3,21 @@ import { EffectsCommandMap } from 'dva';
 import { addRule, queryRule, removeRule, updateRule } from './service';
 
 import { TableListDate } from './data.d';
+import { QueryEnumIdTypes } from '../add/service';
+
+interface RosterTableListDate extends TableListDate{
+  types: number[],
+  statuses: number[],
+}
 
 export interface StateType {
-  data: TableListDate;
+  data: RosterTableListDate;
 }
 
 export type Effect = (
   action: AnyAction,
   effects: EffectsCommandMap & { select: <T>(func: (state: StateType) => T) => T },
+  
 ) => void;
 
 export interface ModelType {
@@ -21,6 +28,7 @@ export interface ModelType {
     add: Effect;
     remove: Effect;
     update: Effect;
+    fetchDictionaryEntry: Effect;
   };
   reducers: {
     save: Reducer<StateType>;
@@ -37,6 +45,8 @@ const Model: ModelType = {
         pageSize: 10,
         current: 1
       },
+      types:[],
+      statuses:[],
     },
   },
 
@@ -79,6 +89,22 @@ const Model: ModelType = {
       });
       if (callback) callback();
     },
+    *fetchDictionaryEntry({ payload }, { call, put }) {
+      const response = yield call(QueryEnumIdTypes, payload);
+      console.log(response);
+      const key = payload.key;
+
+      const payloadData = {};
+      payloadData[key] = response.data;
+
+      console.log('fetchDictionaryEntry.put');
+      console.log(payloadData);
+
+      yield put({
+        type: 'save',
+        payload: payloadData
+      });
+    },
   },
 
   reducers: {
@@ -88,11 +114,13 @@ const Model: ModelType = {
       console.log(state);
       console.log('save.action');
       console.log(action);
-      let pageData = action.payload;
+      // let pageData = action.payload;
+
+      let resData = {...state.data, ...action.payload}
 
       let res = {
         ...state,
-        data: pageData,
+        data: resData,
       };
       console.log('return')
       console.log(res);

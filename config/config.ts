@@ -185,14 +185,14 @@ export default {
   chainWebpack: webpackPlugin,
   proxy: {
     '/server/api': {
-      target: 'https://localhost:8080/',
+      target: 'http://10.2.0.120:8080/',
       changeOrigin: true,
       pathRewrite: {
         '^/server/api': '',
       },
     },
     '/server/roster': {
-      target: 'http://localhost:8080/',
+      target: 'http://10.2.0.120:8080/',
       changeOrigin: true,
       pathRewrite: {
         '^/server/roster': '',
